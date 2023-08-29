@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - SpawnPoint
+  - Bullet
+  - Ground
+  - PickupSpawnPoint
+  - Container
+  - PlayerSpawner
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Player
+  - Water
+  - UI
+  - Environtment
+  - Ground
+  - Pickups
+  - Projectiles
+  - Weird
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 554477109
+    locked: 0
+  - name: Trees
+    uniqueID: 2744660673
+    locked: 0
+  - name: Rocks
+    uniqueID: 1746706051
+    locked: 0
+  - name: Vegetation
+    uniqueID: 103609163
+    locked: 0
+  - name: Player
+    uniqueID: 936119113
+    locked: 0
+  - name: Weapon
+    uniqueID: 1507337211
+    locked: 0
