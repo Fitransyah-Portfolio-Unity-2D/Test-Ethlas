@@ -45,3 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPlayers: 4
+  createRoomInputText: {fileID: 0}
+  joinRoomInputText: {fileID: 0}
+  infoText: {fileID: 0}

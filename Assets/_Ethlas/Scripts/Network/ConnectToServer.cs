@@ -1,6 +1,5 @@
 using Photon.Pun;
-
-
+using Photon.Realtime;
 
 namespace Shooter.Network
 {
@@ -14,7 +13,9 @@ namespace Shooter.Network
 
         public override void OnConnectedToMaster()
         {
-            
+
+            TypedLobby typedLobby = new TypedLobby("TestLobby", LobbyType.Default);
+            PhotonNetwork.JoinLobby(typedLobby);
             PhotonNetwork.LoadLevel("MainMenu");
         }
 
