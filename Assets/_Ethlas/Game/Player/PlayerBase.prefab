@@ -80,6 +80,7 @@ GameObject:
   - component: {fileID: 7389190693243041087}
   - component: {fileID: 3701625989498275650}
   - component: {fileID: 6567727108949176499}
+  - component: {fileID: 3381179641566790633}
   m_Layer: 3
   m_Name: PlayerBase
   m_TagString: Player
@@ -312,31 +313,6 @@ MonoBehaviour:
       m_Action: Jump
       m_Flags: 0
     m_Flags: 0
-  crouchAction:
-    m_Name: Crouch
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 7b48072d-f9d7-4311-b11f-474f73ba6107
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 83068cce-8ef6-48bf-80df-265bf1550e4c
-      m_Path: <Keyboard>/downArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Crouch
-      m_Flags: 0
-    - m_Name: 
-      m_Id: be8b5319-80b1-4db8-855d-b434105dcfcd
-      m_Path: <Keyboard>/s
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Crouch
-      m_Flags: 0
-    m_Flags: 0
 --- !u!114 &3701625989498275650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,6 +349,19 @@ MonoBehaviour:
   dead:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3381179641566790633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7389190693243041086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d5e5f976fce66429b61e7bcd206653, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killCount: 0
 --- !u!1 &8153576418586023485
 GameObject:
   m_ObjectHideFlags: 0

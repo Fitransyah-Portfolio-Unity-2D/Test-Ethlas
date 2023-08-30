@@ -52,6 +52,8 @@ MonoBehaviour:
   - TriggerAttack
   - DestroyGameobject
   - TakeDamageRPC
+  - AddKillRPC
+  - StartRespawnSequence
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -16,19 +16,15 @@ namespace Shooter.Player
 
         private void Start()
         {
-            healthPoints = maxHealthPoints;
+            ResetHealth();
         }
 
        
 
         public void TakeDamage(GameObject instigator, float damage)
         {
-
             lastInstigator = instigator;
             GetComponent<PhotonView>().RPC("TakeDamageRPC", RpcTarget.All, damage);
-
-            
-
         }
 
         [PunRPC]
@@ -50,28 +46,29 @@ namespace Shooter.Player
 
         void Die()
         {
-            //SpawnPlayer playerSpawner = GameObject.FindGameObjectWithTag("PlayerSpawner").GetComponent<SpawnPlayer>();
-            //playerSpawner.DestroySpecificPlayer(gameObject);
+            if (lastInstigator != null)
+            {
+                lastInstigator.GetComponent<KillCount>().AddKill();
+            }
 
-            Destroy(gameObject);
+            if (GetComponent<PhotonView>().IsMine)
+            {
+                RespawnHelper respawnHelper = GameObject.FindGameObjectWithTag("RespawnHelper").GetComponent<RespawnHelper>();
+                if (respawnHelper != null)
+                {
+                    respawnHelper.RequestRespawn(gameObject);
+                }
+            }
+
             // play dead sound
             // loading screen, exit room
             dead.Invoke();
-        }
 
-        public float GetHealthPoints()
-        {
-            return healthPoints;
         }
-
-        public float GetPercentage()
+        
+        public void ResetHealth()
         {
-            return 100 * (healthPoints / maxHealthPoints);
-        }
-
-        public float GetFraction()
-        {
-            return healthPoints / maxHealthPoints;
+            healthPoints = maxHealthPoints;
         }
     }
 }

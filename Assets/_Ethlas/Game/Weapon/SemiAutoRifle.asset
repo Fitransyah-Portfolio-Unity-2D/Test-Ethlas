@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SemiAutoRifle
   m_EditorClassIdentifier: 
   weaponCooldownTime: 1.25
-  weaponSprite: {fileID: 21300000, guid: 25828ddadfeb3f24a9f9463c7ef7c613, type: 3}
+  weaponSprite: {fileID: 21300000, guid: a5313dd1cb410644784b868f0b8dadf5, type: 3}
   projectile: {fileID: 301517875503219778, guid: 4e61949a528479c42b17caae58324fd0, type: 3}

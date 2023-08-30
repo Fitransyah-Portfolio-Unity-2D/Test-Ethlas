@@ -1,6 +1,5 @@
 using Cinemachine;
 using Photon.Pun;
-using Shooter.Combat;
 using UnityEngine;
 
 
@@ -49,7 +48,6 @@ namespace Shooter.Core
                 composer.m_DeadZoneWidth = 0.75f;
             }
         }
-
     }
 }
 
