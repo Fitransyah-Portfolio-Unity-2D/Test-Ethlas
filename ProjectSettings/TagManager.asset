@@ -12,6 +12,7 @@ TagManager:
   - PlayerSpawner
   - RespawnHelper
   - CameraConfiner
+  - Killcount
   layers:
   - Default
   - TransparentFX

@@ -73,11 +73,8 @@ namespace Shooter.Combat
 
         private void SafeDestroy()
         {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                PhotonNetwork.Destroy(gameObject);
-            }
-            
+
+            PhotonNetwork.Destroy(gameObject); 
         }
 
         public void SetInstigator(GameObject instigator)

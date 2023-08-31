@@ -15,6 +15,8 @@ namespace Shooter.Network
         [SerializeField] TMP_Text infoText;
         [SerializeField] GameObject ScrollViewContent;
         [SerializeField] RoomDetail roomItem;
+        [SerializeField] GameObject waitingListUI;
+        [SerializeField] TMP_Text currentPlayerText;
 
         static string roomName = "Deadmatch";
         List<RoomInfo> existingRoomList = new List<RoomInfo>();
@@ -36,7 +38,31 @@ namespace Shooter.Network
         {
             if (!CheckRoomFullness())
             {
-                PhotonNetwork.LoadLevel("Arena");
+                waitingListUI.SetActive(true); 
+                CheckMinimumPlayersAndStart();
+
+            }
+        }
+
+        public override void OnLeftRoom()
+        {
+            waitingListUI.SetActive(false);
+        }
+
+        public void CancelMatch()
+        {
+            if (PhotonNetwork.InRoom)
+            {
+                PhotonNetwork.LeaveRoom();
+            }
+        }
+
+        public void CheckMinimumPlayersAndStart()
+        {
+            currentPlayerText.text = PhotonNetwork.CurrentRoom.PlayerCount.ToString(); 
+            if (PhotonNetwork.CurrentRoom.PlayerCount == maxPlayers)
+            {
+                PhotonNetwork.LoadLevel("Arena"); 
             }
         }
         public override void OnJoinRoomFailed(short returnCode, string message)
@@ -125,6 +151,7 @@ namespace Shooter.Network
         {
             infoText.gameObject.SetActive(false);
         }
+
 
 
     }
