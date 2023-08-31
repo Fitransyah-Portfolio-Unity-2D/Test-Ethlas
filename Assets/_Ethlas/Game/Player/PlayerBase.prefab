@@ -329,6 +329,23 @@ MonoBehaviour:
   weaponSocket: {fileID: 8153576418586023485}
   defaultWeapon: {fileID: 11400000, guid: 32273134c31a5674685950d9e46b9d5c, type: 2}
   equippedWeapon: {fileID: 0}
+  fireAction:
+    m_Name: Fire
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 60669118-1e8e-418c-aa5d-9d236e573bcd
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: dfc894a8-bbb0-4898-b3f0-e565b02b5213
+      m_Path: <Keyboard>/rightShift
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Fire
+      m_Flags: 0
+    m_Flags: 0
 --- !u!114 &6567727108949176499
 MonoBehaviour:
   m_ObjectHideFlags: 0

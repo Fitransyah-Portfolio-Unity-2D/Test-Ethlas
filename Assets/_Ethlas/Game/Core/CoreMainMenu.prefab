@@ -254,6 +254,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5307449402348022513}
     m_Modifications:
+    - target: {fileID: 1535742301368568460, guid: 805f058ea7d02c44e808d88559c156e7, type: 3}
+      propertyPath: m_margin.z
+      value: 1.3188992
+      objectReference: {fileID: 0}
     - target: {fileID: 8285520525925914042, guid: 805f058ea7d02c44e808d88559c156e7, type: 3}
       propertyPath: m_Name
       value: MainMenuCanvas
@@ -362,10 +366,38 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8285520526738623940, guid: 805f058ea7d02c44e808d88559c156e7, type: 3}
+      propertyPath: m_Size
+      value: 0.30658665
+      objectReference: {fileID: 0}
+    - target: {fileID: 8285520526992628379, guid: 805f058ea7d02c44e808d88559c156e7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 91.976
+      objectReference: {fileID: 0}
+    - target: {fileID: 8285520526992628379, guid: 805f058ea7d02c44e808d88559c156e7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -248.35
+      objectReference: {fileID: 0}
     - target: {fileID: 8285520527612631846, guid: 805f058ea7d02c44e808d88559c156e7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5307449402846587474}
+    - target: {fileID: 9159182369475717147, guid: 805f058ea7d02c44e808d88559c156e7, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.8000112
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159182369475717147, guid: 805f058ea7d02c44e808d88559c156e7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 314.0042
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159182369475717147, guid: 805f058ea7d02c44e808d88559c156e7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 288.20682
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159182369475717147, guid: 805f058ea7d02c44e808d88559c156e7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 805f058ea7d02c44e808d88559c156e7, type: 3}
 --- !u!114 &4277236681451277063 stripped

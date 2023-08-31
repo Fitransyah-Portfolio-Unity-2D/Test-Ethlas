@@ -54,7 +54,7 @@ namespace Shooter.Player
             if (GetComponent<PhotonView>().IsMine)
             {
                 RespawnHelper respawnHelper = GameObject.FindGameObjectWithTag("RespawnHelper").GetComponent<RespawnHelper>();
-                if (respawnHelper != null)
+                if (respawnHelper != null && PhotonNetwork.IsMasterClient)
                 {
                     respawnHelper.RequestRespawn(gameObject);
                 }

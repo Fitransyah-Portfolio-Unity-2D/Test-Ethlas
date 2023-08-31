@@ -26,12 +26,6 @@ namespace Shooter.Combat
 
             transform.position = newPosition;
         }
-
-        [PunRPC]
-        void DestroyGameobject()
-        {
-            Destroy(gameObject);
-        }
     }
 }
 

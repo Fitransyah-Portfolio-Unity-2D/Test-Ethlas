@@ -14,7 +14,7 @@ namespace Shooter.Combat
         [SerializeField] GameObject hitEffect = null;
         [SerializeField] UnityEvent onHit;
 
-        
+        int GOownerViewID = 0;
         internal float projectileDirection;
         internal GameObject projectileInstigator = null;
         Health target = null;
@@ -73,12 +73,21 @@ namespace Shooter.Combat
 
         private void SafeDestroy()
         {
-            PhotonNetwork.Destroy(gameObject);
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.Destroy(gameObject);
+            }
+            
         }
 
         public void SetInstigator(GameObject instigator)
         {
             projectileInstigator = instigator;
+        }
+
+        public void SetOwnerViewID(int ownerViewID)
+        {
+            GOownerViewID = ownerViewID;
         }
     }
 }

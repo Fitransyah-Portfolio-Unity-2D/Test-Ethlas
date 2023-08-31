@@ -10,15 +10,12 @@ namespace Shooter.Core
         [SerializeField] GameObject respawnUI;
 
         float delay = 4f;
-        bool isRespawning = false;
         GameObject playerToRespawn = null;
         public void RequestRespawn(GameObject player)
         {
-            if (!isRespawning) 
+            if (player != null) 
             {
-                playerToRespawn = player;
-                isRespawning = true;
-                
+                playerToRespawn = player;                
                 GetComponent<PhotonView>().RPC("StartRespawnSequence", RpcTarget.All);
             }
         }
@@ -36,6 +33,7 @@ namespace Shooter.Core
 
         private IEnumerator RespawnSequence() 
         {
+            playerToRespawn.GetComponent<CapsuleCollider2D>().enabled = false;
             playerToRespawn.SetActive(false);
             GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
             Transform pickedSpawnedPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform;
@@ -46,8 +44,7 @@ namespace Shooter.Core
 
             playerToRespawn.SetActive(true);
             playerToRespawn.GetComponent<Health>().ResetHealth();
-
-            isRespawning = false;
+            playerToRespawn.GetComponent<CapsuleCollider2D>().enabled = true;
             respawnUI.SetActive(false);
         }
     }

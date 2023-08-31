@@ -35,6 +35,8 @@ namespace Shooter.Core
             virtualCamera.Priority = 1;
             virtualCamera.transform.SetParent(playerTransform, false);
 
+            virtualCamera.gameObject.layer = 11;
+
             CinemachineTransposer transposer = virtualCamera.AddCinemachineComponent<CinemachineTransposer>();
             if (transposer != null)
             {

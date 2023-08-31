@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Shooter.Combat
 {
@@ -15,7 +16,23 @@ namespace Shooter.Combat
 
         Sprite equippedWeaponSprite;
 
+        public InputAction fireAction;
         public event Action OnAttackTriggered;
+
+        private void Awake()
+        {
+            fireAction.started += OnFire;
+        }
+
+        private void OnEnable()
+        {
+            fireAction.Enable();
+        }
+
+        private void OnDisable()
+        {
+            fireAction.Enable();
+        }
 
         private void Start()
         {
@@ -25,14 +42,6 @@ namespace Shooter.Combat
         private void Update()
         {
             timeSinceLastAttack += Time.deltaTime;
-            
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                if (photonView.IsMine)
-                {
-                    AttackBehaviour();
-                }
-            }
         }
 
         public void EquipWeapon(Weapon newWeapon)
@@ -58,20 +67,21 @@ namespace Shooter.Combat
             spriteRenderer.sprite = equippedWeaponSprite;
         }
 
-        // input system here
-
-        private void AttackBehaviour()
+        private void OnFire(InputAction.CallbackContext context)
         {
+            if (!photonView.IsMine) return;
+            
             if (timeSinceLastAttack > timeBetweenAttacks)
             {
-                TriggerAttack();
+                TriggerFire();
                 timeSinceLastAttack = 0;
             }
         }
 
-        void TriggerAttack()
+        void TriggerFire()
         {
-            equippedWeapon.LaunchProjectile(gameObject, this);
+            int viewID = GetComponent<PhotonView>().ViewID;
+            equippedWeapon.LaunchProjectile(gameObject, this, viewID);
             OnAttackTriggered();
         }
 

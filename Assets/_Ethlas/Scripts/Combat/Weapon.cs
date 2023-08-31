@@ -12,7 +12,7 @@ namespace Shooter.Combat
 
 
         // called by gunner in hit method
-        public void LaunchProjectile(GameObject instigator, Gunner shooter)
+        public void LaunchProjectile(GameObject instigator, Gunner shooter, int viewID)
         {
             GameObject projectileInstance =  PhotonNetwork.Instantiate(projectile.gameObject.name, shooter.GetWeaponSocket().transform.position, shooter.GetWeaponSocket().transform.rotation);
 
@@ -24,6 +24,7 @@ namespace Shooter.Combat
 
             Projectile projInstanceBehaviour = projectileInstance.GetComponent<Projectile>();
             projInstanceBehaviour.SetInstigator(instigator);
+            projInstanceBehaviour.SetOwnerViewID(viewID);
             projInstanceBehaviour.InitBullet();
         }
 
