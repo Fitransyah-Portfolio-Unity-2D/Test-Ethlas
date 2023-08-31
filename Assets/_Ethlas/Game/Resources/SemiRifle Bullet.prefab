@@ -106,8 +106,4 @@ MonoBehaviour:
   speed: 7
   MaxLifetime: 15
   projectileDamage: 14
-  hitEffect: {fileID: 0}
-  onHit:
-    m_PersistentCalls:
-      m_Calls: []
-  duplicatePrefabs: {fileID: 8477692802761517976, guid: f0d782ab49dcd334e8a510315711284e, type: 3}
+  duplicatePrefab: {fileID: 8477692802761517976, guid: f0d782ab49dcd334e8a510315711284e, type: 3}

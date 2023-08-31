@@ -16,10 +16,10 @@ namespace Shooter.Player
 
         private void Awake()
         {
-            GameObject killCount = GameObject.FindGameObjectWithTag("Killcount");
-            if (killCount != null)
+            GameObject killCountGO = GameObject.FindGameObjectWithTag("Killcount");
+            if (killCountGO != null)
             {
-                killCountText = killCount.GetComponent<TMP_Text>();
+                killCountText = killCountGO.GetComponent<TMP_Text>();
             }
         }
 

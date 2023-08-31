@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponCooldownTime: 0.75
   weaponSprite: {fileID: 21300000, guid: b1e50fd7c3abf014e9cb0d132177d310, type: 3}
-  projectile: {fileID: 4183167628657410740, guid: f0d782ab49dcd334e8a510315711284e, type: 3}
+  projectile: {fileID: 8477692802761517976, guid: f0d782ab49dcd334e8a510315711284e, type: 3}

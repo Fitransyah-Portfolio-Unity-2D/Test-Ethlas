@@ -8,24 +8,11 @@ namespace Shooter.Combat
     {
         [SerializeField] float weaponCooldownTime;
         [SerializeField] Sprite weaponSprite;
-        [SerializeField] Projectile projectile;
+        [SerializeField] GameObject projectile;
 
-
-        // called by gunner in hit method
-        public void LaunchProjectile(GameObject instigator, Gunner shooter, int viewID)
+        public GameObject GetProjectilePrefab()
         {
-            GameObject projectileInstance =  PhotonNetwork.Instantiate(projectile.gameObject.name, shooter.GetWeaponSocket().transform.position, shooter.GetWeaponSocket().transform.rotation);
-
-            Transform projectileContainer = GameObject.FindGameObjectWithTag("Container").transform;
-            if (projectileContainer != null)
-            {
-                projectileInstance.transform.SetParent(projectileContainer);
-            }
-
-            Projectile projInstanceBehaviour = projectileInstance.GetComponent<Projectile>();
-            projInstanceBehaviour.SetInstigator(instigator);
-            projInstanceBehaviour.SetOwnerViewID(viewID);
-            projInstanceBehaviour.InitBullet();
+            return projectile;
         }
 
         public Sprite GetWeaponSprite()

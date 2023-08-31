@@ -78,12 +78,58 @@ namespace Shooter.Combat
             }
         }
 
-        void TriggerFire()
+        public void TriggerFire()
         {
-            int viewID = GetComponent<PhotonView>().ViewID;
-            equippedWeapon.LaunchProjectile(gameObject, this, viewID);
+
+            GameObject prefab = equippedWeapon.GetProjectilePrefab();
+            GameObject projectileInstance = PhotonNetwork.Instantiate(prefab.name, GetWeaponSocket().transform.position, GetWeaponSocket().transform.rotation);
+
+            Transform projectileContainer = GameObject.FindGameObjectWithTag("Container").transform;
+            if (projectileContainer != null)
+            {
+                projectileInstance.transform.SetParent(projectileContainer);
+            }
+
+            Projectile projInstanceBehaviour = projectileInstance.GetComponent<Projectile>();
+            projInstanceBehaviour.OnCollide += OnCollideAction;
+            projInstanceBehaviour.SetInstigator(gameObject);
+            projInstanceBehaviour.InitBullet();
+
+
             OnAttackTriggered();
         }
+
+        public void TriggerFire(Vector3 offset, GameObject duplicatePrefab, float duplicateSpeed)
+        {
+
+            GameObject projectileInstance = PhotonNetwork.Instantiate(duplicatePrefab.name, offset, GetWeaponSocket().transform.rotation);
+
+            Transform projectileContainer = GameObject.FindGameObjectWithTag("Container").transform;
+            if (projectileContainer != null)
+            {
+                projectileInstance.transform.SetParent(projectileContainer);
+            }
+
+            Projectile projInstanceBehaviour = projectileInstance.GetComponent<Projectile>();
+            projInstanceBehaviour.OnCollide += OnCollideAction;
+            projInstanceBehaviour.SetNewSpeed(duplicateSpeed);
+            projInstanceBehaviour.SetInstigator(gameObject);
+            projInstanceBehaviour.InitBullet();
+        }
+
+        private void OnCollideAction(GameObject bulletRef)
+        {
+            if (bulletRef == null) return;
+
+            GameObject instigator = bulletRef.GetComponent<Projectile>().projectileInstigator;
+
+            if (instigator == gameObject)
+            {
+                PhotonNetwork.Destroy(bulletRef);
+            }
+            
+        }
+
 
         public GameObject GetWeaponSocket()
         {

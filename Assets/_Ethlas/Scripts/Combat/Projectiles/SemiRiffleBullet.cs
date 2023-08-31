@@ -6,7 +6,7 @@ namespace Shooter.Combat
 {
     public class SemiRiffleBullet : Projectile
     {
-        [SerializeField] GameObject duplicatePrefabs;
+        [SerializeField] GameObject duplicatePrefab; 
         public override void InitBullet()
         {
             base.InitBullet();
@@ -17,17 +17,11 @@ namespace Shooter.Combat
                 offset += 0.75f;
 
                 Vector3 spawnOffset = new Vector3(transform.position.x + offset * projectileDirection, transform.position.y, transform.position.z);
-                Projectile instance = PhotonNetwork.Instantiate(duplicatePrefabs.name, spawnOffset, Quaternion.identity).GetComponent<Projectile>();
-
-                Transform projectileContainer = GameObject.FindGameObjectWithTag("Container").transform;
-                if (projectileContainer != null)
+                Gunner gunner = projectileInstigator.GetComponent<Gunner>();
+                if (gunner != null)
                 {
-                    instance.transform.SetParent(projectileContainer);
+                    gunner.TriggerFire(spawnOffset, duplicatePrefab, speed);
                 }
-
-                instance.projectileInstigator = projectileInstigator;
-                instance.speed = speed;
-                instance.InitBullet();
             }
 
         }

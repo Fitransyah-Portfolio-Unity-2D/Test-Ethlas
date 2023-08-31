@@ -19,7 +19,7 @@ namespace Shooter.Core
         {
             GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
             spawnPosition = (Vector2)spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
-            GameObject player = PhotonNetwork.Instantiate(playerPrefabs[PhotonNetwork.CurrentRoom.PlayerCount - 1].name, spawnPosition, Quaternion.identity);
+            GameObject player = PhotonNetwork.Instantiate(playerPrefabs[Random.Range(0, playerPrefabs.Length)].name, spawnPosition, Quaternion.identity);
             Transform playerTransform = player.transform;
 
             

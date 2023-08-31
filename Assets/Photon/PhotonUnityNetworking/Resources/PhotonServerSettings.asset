@@ -55,6 +55,9 @@ MonoBehaviour:
   - AddKillRPC
   - StartRespawnSequence
   - BroadcastTimeLimit
+  - UpdateCurrentPlayer
+  - ApplyDamage
+  - Die
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -1,7 +1,8 @@
 ﻿using Photon.Pun;
 using Shooter.Core;
+using System;
 using UnityEngine;
-using UnityEngine.Events;
+
 
 namespace Shooter.Player
 {
@@ -9,66 +10,93 @@ namespace Shooter.Player
     {
         [SerializeField] float maxHealthPoints = 120f;
         [SerializeField] float healthPoints;
-        [SerializeField] UnityEvent<float> takeDamage;
-        [SerializeField] UnityEvent dead;
+        [SerializeField] GameObject respawnUI;
+        private GameObject lastInstigator = null;
 
-        GameObject lastInstigator = null;
+        private PhotonView view = null;
+        private RespawnHelper respawnHelper;
+
 
         private void Start()
-        {
+        { 
+            respawnHelper = GameObject.FindGameObjectWithTag("RespawnHelper").GetComponent<RespawnHelper>();
+            if (respawnHelper == null ) 
+            {
+                Debug.LogError("No respawn helper in the scene");
+            }
+
+            view = GetComponent<PhotonView>();
             ResetHealth();
         }
-
-       
 
         public void TakeDamage(GameObject instigator, float damage)
         {
             lastInstigator = instigator;
-            GetComponent<PhotonView>().RPC("TakeDamageRPC", RpcTarget.All, damage);
+            view.RPC("ApplyDamage", RpcTarget.All, damage);
         }
 
         [PunRPC]
-        private void TakeDamageRPC(float damage)
+        private void ApplyDamage(float damage)
         {
-            // Update health UI
-            // Play player hurt sound
-
-
-            
             healthPoints -= damage;
-            if (healthPoints <= 0f)
-            {
-                Die();
-            }
-
-            takeDamage.Invoke(damage);
+            CheckDie();
         }
 
-        void Die()
+        private void CheckDie()
         {
+            if (healthPoints <= 0f && view.IsMine)
+            {
+                healthPoints = 0f;
+
+                if (respawnUI != null)
+                {
+                    respawnUI.SetActive(true);
+                }
+
+
+                view.RPC("Die", RpcTarget.All);
+            }
+        }
+
+        [PunRPC]
+        private void Die()
+        {
+
+            gameObject.SetActive(false);
+
             if (lastInstigator != null)
             {
                 lastInstigator.GetComponent<KillCount>().AddKill();
             }
 
-            if (GetComponent<PhotonView>().IsMine)
+            if (respawnHelper != null)
             {
-                RespawnHelper respawnHelper = GameObject.FindGameObjectWithTag("RespawnHelper").GetComponent<RespawnHelper>();
-                if (respawnHelper != null && PhotonNetwork.IsMasterClient)
-                {
-                    respawnHelper.RequestRespawn(gameObject);
-                }
+                respawnHelper.RequestRespawn(gameObject);
+                respawnHelper.OnRespawnComplete += OnRespawnCompleteAction;
             }
 
-            // play dead sound
-            // loading screen, exit room
-            dead.Invoke();
-
         }
-        
+
+        private void OnRespawnCompleteAction()
+        {
+            ResetHealth();
+            
+            if (respawnUI != null)
+            {
+                respawnUI.SetActive(false);
+            }
+
+            respawnHelper.OnRespawnComplete -= OnRespawnCompleteAction;
+        }
+
         public void ResetHealth()
         {
             healthPoints = maxHealthPoints;
+        }
+
+        public float GetHealthPoints()
+        {
+            return healthPoints;
         }
     }
 }

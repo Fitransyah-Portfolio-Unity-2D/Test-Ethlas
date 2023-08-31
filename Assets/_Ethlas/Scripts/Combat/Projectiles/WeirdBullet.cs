@@ -7,13 +7,6 @@ namespace Shooter.Combat
     {
         [SerializeField] float amplitude = 1f;             
 
-        Vector3 startPosition;
-
-        private void Start()
-        {
-            startPosition = transform.position;
-        }
-
         private void Update()
         {
             ProjectileBehaviour();

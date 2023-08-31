@@ -1,5 +1,6 @@
 ﻿using Photon.Pun;
 using Shooter.Player;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,14 +11,12 @@ namespace Shooter.Combat
         [SerializeField] internal float speed = 1f;
         [SerializeField] float MaxLifetime = 22f;
         [SerializeField] float projectileDamage = 0f;
-        
-        [SerializeField] GameObject hitEffect = null;
-        [SerializeField] UnityEvent onHit;
 
-        int GOownerViewID = 0;
         internal float projectileDirection;
         internal GameObject projectileInstigator = null;
         Health target = null;
+
+        public event Action<GameObject> OnCollide;
 
         private void Start()
         {
@@ -44,37 +43,29 @@ namespace Shooter.Combat
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.GetComponent<Health>() != null)
+            if (collision.gameObject.tag == "Player" && collision.gameObject != gameObject)
             {
-
-                // To prevent self hit
-                //if (projectileInstigator.gameObject.name == collision.gameObject.name) return;
-
-                target = collision.GetComponent<Health>();
-                target.TakeDamage(projectileInstigator, projectileDamage);
-
-                // Play sound source
-                onHit.Invoke();
-
-                if (hitEffect != null)
+                target = collision.gameObject.GetComponent<Health>();
+                if (target != null && target.GetHealthPoints() > 0f)
                 {
-                    PhotonNetwork.Instantiate(hitEffect.gameObject.name, collision.transform.position, collision.transform.rotation);
+                    target.TakeDamage(projectileInstigator, projectileDamage);
                 }
 
-                SafeDestroy();
+                if (OnCollide != null)
+                {
+                    OnCollide(gameObject);
+                }
+                
 
             }
             else
             {
-                SafeDestroy();
+                if (OnCollide != null)
+                {
+                    OnCollide(gameObject);
+                }
             }
 
-        }
-
-        private void SafeDestroy()
-        {
-
-            PhotonNetwork.Destroy(gameObject); 
         }
 
         public void SetInstigator(GameObject instigator)
@@ -82,9 +73,9 @@ namespace Shooter.Combat
             projectileInstigator = instigator;
         }
 
-        public void SetOwnerViewID(int ownerViewID)
+        public void SetNewSpeed(float duplicateSpeed)
         {
-            GOownerViewID = ownerViewID;
+            speed = duplicateSpeed;
         }
     }
 }

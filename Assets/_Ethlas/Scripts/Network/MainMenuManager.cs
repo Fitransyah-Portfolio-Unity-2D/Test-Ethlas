@@ -40,6 +40,7 @@ namespace Shooter.Network
             {
                 waitingListUI.SetActive(true); 
                 CheckMinimumPlayersAndStart();
+                //PhotonNetwork.LoadLevel("Arena");
 
             }
         }
@@ -47,6 +48,11 @@ namespace Shooter.Network
         public override void OnLeftRoom()
         {
             waitingListUI.SetActive(false);
+        }
+
+        public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+        {
+            CheckMinimumPlayersAndStart();
         }
 
         public void CancelMatch()
@@ -59,12 +65,14 @@ namespace Shooter.Network
 
         public void CheckMinimumPlayersAndStart()
         {
-            currentPlayerText.text = PhotonNetwork.CurrentRoom.PlayerCount.ToString(); 
+            currentPlayerText.text = PhotonNetwork.CurrentRoom.PlayerCount.ToString();
             if (PhotonNetwork.CurrentRoom.PlayerCount == maxPlayers)
             {
                 PhotonNetwork.LoadLevel("Arena"); 
             }
         }
+
+
         public override void OnJoinRoomFailed(short returnCode, string message)
         {
             infoText.text = "Sorry room you're trying to join is full, please create a room or join with quickmatch";
