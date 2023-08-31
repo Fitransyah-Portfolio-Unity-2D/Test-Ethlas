@@ -48,7 +48,7 @@ namespace Shooter.Core
             {
                 composer.m_DeadZoneHeight = 0.2f;
                 composer.m_DeadZoneWidth = 0.75f;
-            }
+            }   
         }
     }
 }

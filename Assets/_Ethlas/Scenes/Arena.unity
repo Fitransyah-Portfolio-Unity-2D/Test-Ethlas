@@ -243,5 +243,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Core
       objectReference: {fileID: 0}
+    - target: {fileID: 5768243110426657284, guid: 6f40faabb9a549f40a4dab38eb32d1fa, type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f40faabb9a549f40a4dab38eb32d1fa, type: 3}
