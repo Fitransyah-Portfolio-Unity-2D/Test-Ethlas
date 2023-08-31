@@ -22,8 +22,6 @@ namespace Shooter.Core
             GameObject player = PhotonNetwork.Instantiate(playerPrefabs[Random.Range(0, playerPrefabs.Length)].name, spawnPosition, Quaternion.identity);
             Transform playerTransform = player.transform;
 
-            
-
             //GameObject virtualCameraGO = new GameObject("VirtualCamera");
             GameObject virtualCameraGO = new GameObject("VirtualCamera_" + PhotonNetwork.LocalPlayer.ActorNumber); // Unique camera name
             CinemachineVirtualCamera virtualCamera = virtualCameraGO.AddComponent<CinemachineVirtualCamera>();

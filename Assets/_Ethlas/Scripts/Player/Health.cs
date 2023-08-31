@@ -16,17 +16,30 @@ namespace Shooter.Player
         private PhotonView view = null;
         private RespawnHelper respawnHelper;
 
+        private void Awake()
+        {
+            respawnHelper = GameObject.FindGameObjectWithTag("RespawnHelper").GetComponent<RespawnHelper>();
+            if (respawnHelper == null)
+            {
+                Debug.LogError("No repsawn helper available");
+            }
+            view = GetComponent<PhotonView>();
+        }
 
         private void Start()
         { 
-            respawnHelper = GameObject.FindGameObjectWithTag("RespawnHelper").GetComponent<RespawnHelper>();
-            if (respawnHelper == null ) 
-            {
-                Debug.LogError("No respawn helper in the scene");
-            }
-
-            view = GetComponent<PhotonView>();
             ResetHealth();
+
+            if (view != null)
+            {
+                view.RPC("SetUniqueName", RpcTarget.All);
+            }
+        }
+
+        [PunRPC]
+        void SetUniqueName()
+        {
+            gameObject.name = gameObject.name + view.ViewID;
         }
 
         public void TakeDamage(GameObject instigator, float damage)

@@ -55,6 +55,11 @@ namespace Shooter.Network
             CheckMinimumPlayersAndStart();
         }
 
+
+        public override void OnCreatedRoom()
+        {
+            print("on room created");
+        }
         public void CancelMatch()
         {
             if (PhotonNetwork.InRoom)

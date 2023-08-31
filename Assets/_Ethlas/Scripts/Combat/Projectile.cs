@@ -68,6 +68,14 @@ namespace Shooter.Combat
 
         }
 
+        private void SafeDestroy()
+        {
+            if (OnCollide != null)
+            {
+                OnCollide(gameObject);
+            }
+        }
+
         public void SetInstigator(GameObject instigator)
         {
             projectileInstigator = instigator;
